@@ -48,6 +48,7 @@ typedef struct msll_item_t {
 } msll_item_t;
 
 msll_t *msll_new(void);
+void msll_clear(msll_t *msll);
 void msll_free(msll_t *msll);
 
 /* traversal */
@@ -85,5 +86,16 @@ int msll_consume(msll_t *msll, msll_t *items);
 int msll_traverse(msll_t *msll, msll_traversefn_t fn, void *ctx);
 
 void msll_msort(msll_t *msll, msll_cmpfn_t fn);
+void msll_qsort(msll_t *msll, msll_cmpfn_t fn);
+
+/*
+msll_t *msll_slice_at(msll_t *msll, uintmax_t start, uintmax_t end);
+msll_t *msll_slice(msll_t *msll, msll_item_t *start, msll_item_t *end);
+msll_t *msll_grep
+msll_t *msll_map
+msll_t *msll_traverse_items
+int msll_item_belongs_to(msll_t *msll, msll_item_t *item);
+uintmax_t msll_item_index(msll_t *msll, msll_item_t *item);
+*/
 
 #endif /* MSINGLELINKEDLIST_H */
