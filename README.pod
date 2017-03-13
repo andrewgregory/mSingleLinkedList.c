@@ -1,0 +1,92 @@
+=head1 NAME
+
+mSingleLinkedList.c - minimalist single-linked list in C
+
+=head1 SYNOPSIS
+
+ #include "mSinglyLinkedList.c"
+
+ void main(void) {
+     msll_t *msll = msll_new();
+     msll_item_t *item;
+
+     msll_append(msll, "foo");
+     msll_append(msll, "bar");
+     msll_append(msll, "baz");
+
+     for(item = msll_first(msll); item; item = msll_next(msll, item)) {
+        puts(msll_value(item));
+     }
+
+     msll_free(msll);
+ }
+
+=head1 DESCRIPTION
+
+B<mSinglyLinkedList.c> is a basic implementation of a singly linked list.
+
+=head2 Efficient Functions
+
+=over
+
+=item msll_t *msll_new(void);
+
+=item void msll_free(msll_t *msll);
+
+=item msll_item_t *msll_first(msll_t *msll);
+
+=item msll_item_t *msll_last(msll_t *msll);
+
+=item msll_item_t *msll_next(msll_t *msll, msll_item_t *item);
+
+=item msll_item_t *msll_push(msll_t *msll, msll_value_t value);
+
+=item int msll_pop(msll_t *msll, msll_value_t *value);
+
+=item msll_item_t *msll_append(msll_t *msll, msll_value_t value);
+
+=item msll_item_t *msll_insert_after_item(msll_t *msll, msll_item_t *item, msll_value_t data);
+
+=item int msll_remove_item(msll_t *msll, msll_item_t *item, msll_value_t *value);
+
+=item uintmax_t msll_length(msll_t *msll);
+
+=item void msll_reverse(msll_t *msll);
+
+=item msll_item_t *msll_lfind(msll_t *msll, msll_value_t needle, msll_eqfn_t cmp);
+
+=item msll_t *msll_copy(msll_t *msll);
+
+=item int msll_consume(msll_t *msll, msll_t *items);
+
+=item int msll_traverse(msll_t *msll, msll_traversefn_t fn, void *ctx);
+
+=item void msll_msort(msll_t *msll, msll_cmpfn_t fn);
+
+=back
+
+=head2 Inefficient Functions
+
+The following functions are provided for convenience, but are not very
+efficient for singly linked lists.  If you find yourself using any of them, you
+may want to consider using a different data type.
+
+=over
+
+=item msll_item_t *msll_at(msll_t *msll, uintmax_t index);
+
+=item msll_item_t *msll_prev(msll_t *msll, msll_item_t *item);
+
+=item msll_item_t *msll_insert_before(msll_t *msll, uintmax_t index, msll_value_t data);
+
+=item msll_item_t *msll_insert_after(msll_t *msll, uintmax_t index, msll_value_t data);
+
+=item int msll_remove(msll_t *msll, uintmax_t index, msll_value_t *value);
+
+=item int msll_shift(msll_t *msll, msll_value_t *value);
+
+=item msll_item_t *msll_insert_before_item(msll_t *msll, msll_item_t *item, msll_value_t data);
+
+=item msll_item_t *msll_rfind(msll_t *msll, msll_value_t needle, msll_eqfn_t cmp);
+
+=back
